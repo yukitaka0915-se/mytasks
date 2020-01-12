@@ -1,0 +1,83 @@
+.task-main
+  .main-header
+    .main-header__left-box
+      %h2.main-header__left-box__current-group
+        リマインダー
+      %ul.main-header__left-box__task-list
+        タスク数 7
+        %li.main-header__left-box__task-list--complete
+          完了 1 件 
+        %li.main-header__left-box__task-list--warning
+          期限間近 1 件 
+        %li.main-header__left-box__task-list--expired
+          期限切れ 1 件 
+
+  .tasks
+    .task--expired
+      .task{data: {task: {id: 3}}}
+      .task__upper-info
+        %p.task__upper-info__talker
+          お弁当を作る。
+        %p.task__upper-info__date
+          2020/01/05 12:00:00
+      .task__lower-info
+        %p.task__lower-info__target
+          期限日: 2020/01/10 07:30
+        %p.task__lower-info__complete
+          完了日: 未達
+    .task--warning
+      .task{data: {task: {id: 2}}}
+      .task__upper-info
+        %p.task__upper-info__talker
+          お弁当を作る。
+        %p.task__upper-info__date
+          2020/01/05 12:00:00
+      .task__lower-info
+        %p.task__lower-info__target
+          期限日: 2020/01/15 07:30
+        %p.task__lower-info__complete
+          完了日: 未達
+    .task--expired
+      .task{data: {task: {id: 1}}}
+      .task__upper-info
+        %p.task__upper-info__talker
+          振り込みをする。
+        %p.task__upper-info__date
+          2020/01/05 12:00:00
+      .task__lower-info
+        %p.task__lower-info__target
+          期限日: 2020/01/08 10:30
+        %p.task__lower-info__complete
+          完了日: 2020/01/08 10:10
+    .task--normal
+      .task{data: {task: {id: 1}}}
+      .task__upper-info
+        %p.task__upper-info__talker
+          ヘッドホンを見に行く。
+        %p.task__upper-info__date
+          2020/01/12 12:00:00
+      .task__lower-info
+        %p.task__lower-info__target
+          期限日: 2020/01/26 10:30
+        %p.task__lower-info__complete
+          完了日: 未達
+
+  .form
+    %p
+      タスクのタイトル
+    %form
+      .field
+        %select.field__select{name: "priority_id"}
+          %option{value: "0"} --
+          %option{value: "1"} 重要度1
+          %option{value: "2"} 重要度2
+          %option{value: "3"} 重要度3
+        %input.field__text{name: "task[description]", placeholder: "type a description", type: "text"}/
+        %input.field__text{name: "task[place]", placeholder: "type a place", type: "text"}/
+        %input.field__text{name: "task[target_dt]", type: "date"}/
+        %input.field__text{name: "task[warning_st_days]", type: "number"}/
+        %input.field__text{name: "task[warning_dt]", type: "date"}/
+        %input.field__text{name: "task[completed]", type: "checkbox"}/
+        %label.field__label
+          完了日: 
+      %input.submit-btn{name: "commit", type: "submit", value: "Save"}/

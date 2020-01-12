@@ -1,0 +1,11 @@
+.task
+  .task{data: {task: {id: task.id}}}
+  .task__upper-info
+    %p.task__upper-info__talker
+      = task.user.name
+    %p.task__upper-info__date
+      = task.created_at.strftime("%Y/%m/%d %H:%M")
+  .task__lower-info
+    %p.task__lower-info__text
+      = task.body if task.body.present?
+    = image_tag task.image.url, class: 'lower-task__image' if task.image.present?
