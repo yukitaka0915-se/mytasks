@@ -1,0 +1,41 @@
+= form_for group do |f|
+  - if group.errors.any?
+    .mytask-group-form__errors
+      %h2= "#{group.errors.full_tasks.count}件のエラーが発生しました。"
+      %ul
+        - group.errors.full_tasks.each do |task|
+          %li= task
+  .mytask-group-form__field
+    .mytask-group-form__field--left
+      = f.label :name, class: 'mytask-group-form__label'
+    .mytask-group-form__field--right
+      = f.text_field :name, class: 'mytask__group_name mytask-group-form__input', placeholder: 'グループ名を入力してください'
+  .mytask-group-form__field
+    .mytask-group-form__field--left
+      %label.mytask-group-form__label{:for => "mytask_group_チャットメンバーを追加"} チャットメンバーを追加
+    .mytask-group-form__field--right
+      .mytask-group-form__search.clearfix
+        %input#user-search-field.mytask-group-form__input{:placeholder => "追加したいユーザー名を入力してください", :type => "text", data:{group_id:"#{group.id}"}}
+      #user-search-result
+
+  .mytask-group-form__field
+    .mytask-group-form__field--left
+      %label.mytask-group-form__label{:for => "mytask_group_チャットメンバー"} チャットメンバー
+    .mytask-group-form__field--right
+      .mytask-group-user
+        %input{name: "group[user_ids][]", type: "hidden", value: current_user.id}
+        %p.mytask-group-user__name= current_user.name
+      #mytask-group-users.js-add-user
+        - group.users.each do |user|
+          - if current_user.name != user.name
+            .mytask-group-user.clearfix.js-mytask-member
+              %input{name: "group[user_ids][]", type: "hidden", value: user.id}
+              %p.mytask-group-user__name= user.name
+              .user-search-remove.mytask-group-user__btn.mytask-group-user__btn--remove.js-remove-btn{ data:{user_id:"#{user.id}", user_name: "#{user.name}"}}
+                削除
+
+
+  .mytask-group-form__field.clearfix
+    .mytask-group-form__field--left
+    .mytask-group-form__field--right
+      = f.submit class: 'mytask-group-form__action-btn'
