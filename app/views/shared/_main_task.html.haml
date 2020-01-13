@@ -6,78 +6,104 @@
       %ul.main-header__left-box__task-list
         タスク数 7
         %li.main-header__left-box__task-list--complete
-          完了 1 件 
+          完了 1 件
         %li.main-header__left-box__task-list--warning
-          期限間近 1 件 
-        %li.main-header__left-box__task-list--expired
-          期限切れ 1 件 
-
+          期限間近 1 件
+        %li.main-header__left-box__task-list--overdue
+          期限切れ 1 件
+    = link_to "#" do
+      .main-header__edit-btn Edit
   .tasks
-    .task--expired
-      .task{data: {task: {id: 3}}}
-      .task__upper-info
-        %p.task__upper-info__talker
-          お弁当を作る。
-        %p.task__upper-info__date
-          2020/01/05 12:00:00
-      .task__lower-info
-        %p.task__lower-info__target
-          期限日: 2020/01/10 07:30
-        %p.task__lower-info__complete
-          完了日: 未達
-    .task--warning
-      .task{data: {task: {id: 2}}}
-      .task__upper-info
-        %p.task__upper-info__talker
-          お弁当を作る。
-        %p.task__upper-info__date
-          2020/01/05 12:00:00
-      .task__lower-info
-        %p.task__lower-info__target
-          期限日: 2020/01/15 07:30
-        %p.task__lower-info__complete
-          完了日: 未達
-    .task--expired
-      .task{data: {task: {id: 1}}}
-      .task__upper-info
-        %p.task__upper-info__talker
-          振り込みをする。
-        %p.task__upper-info__date
-          2020/01/05 12:00:00
-      .task__lower-info
-        %p.task__lower-info__target
-          期限日: 2020/01/08 10:30
-        %p.task__lower-info__complete
-          完了日: 2020/01/08 10:10
-    .task--normal
-      .task{data: {task: {id: 1}}}
-      .task__upper-info
-        %p.task__upper-info__talker
-          ヘッドホンを見に行く。
-        %p.task__upper-info__date
-          2020/01/12 12:00:00
-      .task__lower-info
-        %p.task__lower-info__target
-          期限日: 2020/01/26 10:30
-        %p.task__lower-info__complete
-          完了日: 未達
+    .task{data: {task: {id: 4}}}
+      .task--normal
+        .task__upper-info
+          %p.task__upper-info__talker
+            ヘッドホンを見に行く。
+          %p.task__upper-info__date
+            2020/01/12 12:00:00
+        .task__lower-info
+          %p.task__lower-info__target
+            期限日: 2020/01/26 16:00
+          %p.task__lower-info__complete
+            完了日: 未達
+    .task{data: {task: {id: 3}}}
+      .task--warning
+        .task__upper-info
+          %p.task__upper-info__talker
+            お弁当を作る。
+          %p.task__upper-info__date
+            2020/01/05 12:00:00
+        .task__lower-info
+          %p.task__lower-info__target
+            期限日: 2020/01/15 07:30
+          %p.task__lower-info__complete
+            完了日: 未達
+    .task{data: {task: {id: 2}}}
+      .task--overdue
+        .task__upper-info
+          %p.task__upper-info__talker
+            お弁当を作る。
+          %p.task__upper-info__date
+            2020/01/05 12:00:00
+        .task__lower-info
+          %p.task__lower-info__target
+            期限日: 2020/01/10 07:30
+          %p.task__lower-info__complete
+            完了日: 未達
+    .task{data: {task: {id: 1}}}
+      .task--complete
+        .task__upper-info
+          %p.task__upper-info__talker
+            振り込みをする。
+          %p.task__upper-info__date
+            2020/01/05 12:00:00
+        .task__lower-info
+          %p.task__lower-info__target
+            期限日: 2020/01/08 10:30
+          %p.task__lower-info__complete
+            完了日: 2020/01/08 10:10
 
   .form
-    %p
-      タスクのタイトル
-    %form
+    .form__task-name
+      ヘッドホンを見に行く。
+    %form{target: "#"}
       .field
-        %select.field__select{name: "priority_id"}
-          %option{value: "0"} --
-          %option{value: "1"} 重要度1
-          %option{value: "2"} 重要度2
-          %option{value: "3"} 重要度3
-        %input.field__text{name: "task[description]", placeholder: "type a description", type: "text"}/
-        %input.field__text{name: "task[place]", placeholder: "type a place", type: "text"}/
-        %input.field__text{name: "task[target_dt]", type: "date"}/
-        %input.field__text{name: "task[warning_st_days]", type: "number"}/
-        %input.field__text{name: "task[warning_dt]", type: "date"}/
-        %input.field__text{name: "task[completed]", type: "checkbox"}/
-        %label.field__label
-          完了日: 
-      %input.submit-btn{name: "commit", type: "submit", value: "Save"}/
+        %table
+          %tr
+            %th.field__title--completed 完了
+            %th.field__title--priority_id 重要度
+            %th.field__title--description タスクの内容
+            %th.field__title 場所
+            %th.field__title 期限日
+            %th.field__title 期限時刻
+            %th.field__title--warning_st_days 警告
+            %th.field__title タスクリスト
+            %th.field__title 完了日
+          %tr
+            %td
+              %input.field__text--completed{value: "", name: "task[completed]", type: "checkbox"}/
+            %td
+              %select.field__text--priority_id{name: "priority_id"}
+                %option{value: "0"} --
+                %option{selected: "selected", value: "1"} 重要度1
+                %option{value: "2"} 重要度2
+                %option{value: "3"} 重要度3
+            %td
+              %input.field__text--description{value: "お店で視聴しながら決める。", name: "task[description]", placeholder: "type a description", type: "textarea"}
+            %td
+              %input.field__text{value: "秋葉原", name: "task[place]", placeholder: "type a place", type: "text"}
+            %td
+              %input.field__text{value: "2020-01-26", name: "task[target_dt]", type: "date"}
+            %td
+              %input.field__text{value: "16:00", name: "task[target_dt]", type: "time"}
+            %td
+              %input.field__text--warning_st_days{value: "7", name: "task[warning_st_days]", type: "number"}日前
+            %td
+              %select.field__text--group_id{name: "group_id"}
+                %option{selected: "selected", value: "1"} リマインダー
+                %option{value: "2"} sample1
+                %option{value: "3"} sample2
+                %option{value: "4"} sample3
+            %td
+              %label.field__label 未達 
+      %input.submit-btn{name: "commit", type: "submit", value: "Save"}

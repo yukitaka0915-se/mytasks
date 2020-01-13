@@ -28,6 +28,15 @@ module Mytasks
     # the framework and any gems in your application.
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.system_tests = nil
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+      g.test_framework false
+    end
+    
+    config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'    
   end
 end

@@ -35,16 +35,27 @@
     overflow: scroll;
     .group{
       margin-bottom: $sideGroup_marginBottom;
-      &__group-name{
+      %__task-title {
+        font-size: $sideHeader_fontsize_latestmsg;
+      }
+      &__task-name{
         font-size: $sideHeader_fontsize_groupname;
         margin-bottom: $sideGroup_groupname_marginBottom;
       }
-      &__latest-task{
-        font-size: $sideHeader_fontsize_latestmsg;
+      &__length{
+        @extend %__task-title;
+      }
+      &__complete{
+        @extend %__task-title;
+        &--length {
+          @extend %__task-title;
+        }
+        &--latest {
+          @extend %__task-title;
+        }
       }
     }
   }
-
 }
 
 

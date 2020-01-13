@@ -13,13 +13,13 @@ $padding_TB0_LR20px: 0 20px;      //左右のみにpaddingを設定する際に�
 
 //// side-barの定義
 // side-bar全体
-$sideBar_width: 300px;                    // side-bar全体の幅
+$sideBar_width: 250px;                    // side-bar全体の幅
 
 // side-header
 $side_color_darkBlack: #253141;         // 背景色
 
 $sideHeader_fontsize_username: 16px;      // ログインユーザー名のフォントサイズ
-$sideHeader_fontsize_groupname: 15px;     // チャットグループ名のフォントサイズ
+$sideHeader_fontsize_groupname: 15px;     // タスクグループ名のフォントサイズ
 $sideHeader_fontsize_latestmsg: 11px;     // 最新メッセージのフォントサイズ
 
 // side-groups
@@ -48,7 +48,7 @@ $editButton_hight: 40px;                   // 送信ボタンの高さ
 $editButton_maginRight: 40px;              // 送信ボタンの右余白
 
 // form
-$form_height: 90px;                        // formの高さ
+$form_height: 140px;                        // formの高さ
 
 // tasks
 $editButton_maginRight: 40px;              // 背景色
