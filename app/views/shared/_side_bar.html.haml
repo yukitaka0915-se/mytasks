@@ -5,63 +5,17 @@
         = current_user.name
       %ul.side-header__box__menu
         %li.side-header__box__menu__new-task
-          = link_to "#" do
+          = link_to new_user_group_path(current_user) do
             = icon('fas', 'edit')
         %li.side-header__box__menu__edit-user
           = link_to edit_user_registration_path(current_user) do
             = icon('fas', 'cog')
   .groups
-    = link_to "#" do
+    - current_user.groups.each do |group|
       .group
-        %p.group__task-name リマインダー
-        %p.group__length タスク総件数：3件
-        %p.group__complete--length タスク完了数：1件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample1
-        %p.group__length タスク総件数：4件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample2
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample3
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample4
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample5
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample6
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample7
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
-    = link_to "#" do
-      .group
-        %p.group__task-name sample8
-        %p.group__length タスク総件数：0件
-        %p.group__complete--length タスク完了数：0件
-        %p.group__complete--latest 最新完了日：なし
+        = link_to edit_user_group_path(current_user,group) do
+          .group__task-name
+            = group.name
+          .group__length タスク総件数：4件
+          .group__complete--length タスク完了数：0件
+          .group__complete--latest 最新完了日：なし
