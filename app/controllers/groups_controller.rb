@@ -10,9 +10,8 @@ class GroupsController < ApplicationController
   end
 
   def create
-    # @group = Group.new(group_params)
-    binding.pry
-    if @group.create(group_params)
+    @group = Group.new(group_params)
+    if @group.save
       redirect_to root_path, notice: 'グループを作成しました'
     else
       render :new
@@ -42,7 +41,16 @@ class GroupsController < ApplicationController
   end
 
   def get_group
-    @group = Group.where("user_id = ?",params[:user_id]).order("id")
+    @group = Group.has_with_mytasklist(current_user.id).order("id")
+    if @group.count == 0
+      # タスクリスト「リマインダー」を作成する。
+      @group = Group.new(
+        name: "リマインダー",
+        user_id: current_user.id,
+        authority: true
+      )
+      @group.save
+    end 
   end
 
   def set_group

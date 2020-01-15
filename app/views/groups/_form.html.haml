@@ -1,4 +1,4 @@
-= form_with(model: group, url: url)do |f|
+= form_with(model: group, local: true)do |f|
   - if group.errors.any?
     .chat-group-form__errors
       %h2= "#{group.errors.full_messages.count}件のエラーが発生しました。"
@@ -14,8 +14,8 @@
     .mytask-group-form__field--left
     .mytask-group-form__field--right
       = f.submit class: 'mytask-group-form__action-btn'
-      - if local_assigns[:edit_flag].present?
-        = link_to user_group_path(current_user, @group), method: :delete do
+      - if local_assigns[:edit_flag].present? and group.authority == false
+        = link_to group_path(group), method: :delete do
           .mytask-group-form__delete-btn
             削除
 
