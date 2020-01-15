@@ -20,18 +20,25 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to group_messages_path(@group), notice: 'グループを更新しました'
+      redirect_to group_path(@group), notice: 'グループを更新しました'
     else
       render :edit
     end
   end
 
   def destroy
-    if @group.destroy(group_params)
-      redirect_to group_messages_path(@group), notice: 'グループを更新しました'
+    if @group.destroy
+      redirect_to group_path(@group), notice: 'グループを更新しました'
+      render :index
     else
       render :edit
     end
+    if @group.destroy
+      notice = 'グループを削除しました'
+    else
+      notice = 'グループが削除できませんでした。'
+    end
+    redirect_to root_path, notice: notice
   end
 
   private
