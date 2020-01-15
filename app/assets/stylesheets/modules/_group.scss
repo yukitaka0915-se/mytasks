@@ -54,9 +54,18 @@ li {
   }
   &__action-btn {
     display: inline-block;
+    margin-top: 10px;
     padding: 12px 20px;
     color: #fff;
     background-color: #38aef0;
+    border: 0;
+  }
+  &__delete-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    color: #fff;
+    background-color: $task_color_overdue;
     border: 0;
   }
   &__field {
