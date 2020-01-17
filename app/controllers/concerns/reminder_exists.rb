@@ -3,6 +3,7 @@ module ReminderExists
 
   private
 
+  # まだ正常に動作しない
   def reminder_exists
     if @group.count == 0
       # タスクリスト「リマインダー」を作成する。

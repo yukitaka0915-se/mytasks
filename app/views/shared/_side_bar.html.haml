@@ -13,9 +13,13 @@
   .groups
     - current_user.groups.each do |group|
       .group
-        = link_to edit_group_path(group) do
+        = link_to group_task_path(group) do
           .group__task-name
             = group.name
-          .group__length タスク総件数：4件
-          .group__complete--length タスク完了数：0件
-          .group__complete--latest 最新完了日：なし
+          .group__length タスク総数：
+            = group.task.length "件"
+          .group__complete--length タスク完了数：
+            = group.task.coupletelength "件"
+          .group__complete--latest 最新完了日：
+            = group.task.latest_complete_dt
+
