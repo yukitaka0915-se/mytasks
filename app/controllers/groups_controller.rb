@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  include ReminderExists
   before_action :get_group, only: [:index]
   before_action :set_group, only: [:edit, :update, :destroy]
 
@@ -42,15 +43,7 @@ class GroupsController < ApplicationController
 
   def get_group
     @group = Group.has_with_mytasklist(current_user.id).order("id")
-    if @group.count == 0
-      # タスクリスト「リマインダー」を作成する。
-      @group = Group.new(
-        name: "リマインダー",
-        user_id: current_user.id,
-        authority: true
-      )
-      @group.save
-    end 
+    reminder_exists
   end
 
   def set_group
