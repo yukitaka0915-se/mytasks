@@ -6,5 +6,5 @@ class User < ApplicationRecord
  
   has_many :groups, dependent: :destroy
   # has_many :groups, dependent: :restrict_with_error
-  # has_many :tasks, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 end
