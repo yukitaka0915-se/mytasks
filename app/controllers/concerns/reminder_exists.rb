@@ -4,7 +4,7 @@ module ReminderExists
   private
 
   # ユーザーのサインアップ後に、タスクリスト「リマインダー」を作成する。
-  # まだ正常に動作しない
+  # 正常に動作していない
   def reminder_exists
     if @group.count == 0
       @group = Group.new(

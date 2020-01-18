@@ -2,17 +2,26 @@
   .main-header
     .main-header__left-box
       %h2.main-header__left-box__current-group
-        リマインダー
+        = @group.name
       %ul.main-header__left-box__task-list
-        タスク数 7
+        %li.main-header__left-box__task-list--total
+          タスク数：
+          = @tasks.count
+          件
         %li.main-header__left-box__task-list--complete
-          完了 1 件
+          完了数：
+          = @tasks_completed.count
+          件
         %li.main-header__left-box__task-list--warning
-          期限間近 1 件
+          期限間近：
+          件
         %li.main-header__left-box__task-list--overdue
-          期限切れ 1 件
-    = link_to "#" do
-      .main-header__edit-btn Edit
+          期限切れ：
+          件
+    - if @group.authority == false
+      = link_to edit_group_path(@group.id) do
+        .main-header__edit-btn Edit
+
   .tasks
     .task{data: {task: {id: 4}}}
       .task--normal

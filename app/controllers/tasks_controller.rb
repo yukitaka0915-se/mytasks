@@ -30,7 +30,8 @@ class TasksController < ApplicationController
   end
 
   def set_tasks
-    @tasks = Task.includes(:group).where(user: current_user.id)
+    @tasks = Task.search_all(params[:group_id], current_user.id)
+    @tasks_completed = Task.search_completed(params[:group_id], current_user.id)
   end
 
 end

@@ -45,7 +45,7 @@
       &__length{
         @extend %__task-title;
       }
-      &__complete{
+      &__completed{
         @extend %__task-title;
         &--length {
           @extend %__task-title;

@@ -5,15 +5,12 @@ class Task < ApplicationRecord
   validates :title, presence: true, uniqueness: true
 
   # カレントユーザーとカレントタスクリストの総数を取得する。
-  scope :exists_reminder, -> (user_id){
-    where("user_id = ?", user_id).where("authority = true").where("name = 'リマインダー'")
+  scope :search_all, -> (user_id, group_id){
+    where(user: user_id).where(group: group_id)
   }
-  def show_last_message
-    if (last_message = messages.last).present?
-      last_message.body? ? last_message.body : '画像が投稿されています'
-    else
-      'まだメッセージはありません。'
-    end
-  end
-  
+
+  scope :search_completed, -> (user_id, group_id){
+    search_all(user_id, group_id).where(completed: true)
+  }
+
 end

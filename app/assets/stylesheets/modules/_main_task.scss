@@ -2,6 +2,7 @@
   width: $main_width;
   float: left;
   .main-header{
+    // background-color: $main_back_color;
     height: $header_height;
     padding: $padding_TB0_LR40px;
     @include flexbox;
@@ -9,20 +10,32 @@
     border-bottom: solid 1px #eeeeee;
     overflow: scroll;
     &__left-box{
-      margin-top: 35px;
+      margin-top: 25px;
+      margin-bottom:10px;
       &__current-group{
         font-size: 20px;
         color: $main_color_blackInk;
-        margin-bottom:15px;
       }
       &__task-list{
         @include flexbox;
         font-size: 12px;
-        color: $main_color_lightgray;
-        &__task{
+        list-style: none;
+        &--total{
+          background-color: $light_green;
           margin-left: $marginleft_interval;
-          list-style: none;
         }
+        &--complete{
+          background-color: $task_color_complete;
+          margin-left: $marginleft_interval;
+        }
+        &--warning{
+          background-color: $task_color_warning;
+          margin-left: $marginleft_interval;
+        }
+        &--overdue{
+          background-color: $task_color_overdue;
+          margin-left: $marginleft_interval;
+       }
       }
     }
     &__edit-btn{
@@ -45,7 +58,8 @@
   .tasks{
     height: $mainTasks_hight;
     padding: 20px 40px;
-    background-color: #f0f0f0;
+    background-color: $main_back_color;
+    // background-color: #f0f0f0;
     overflow: scroll;
     .task{
       padding-bottom: 20px;

@@ -16,7 +16,19 @@
         = link_to group_tasks_path(group) do
           .group__task-name
             = group.name
-          .group__length タスク総数：
-          .group__complete--length タスク完了数：
-          .group__complete--latest 最新完了日：
+          .group__length
+            タスク総数：
+            = group.tasks.count
+            件
+          .group__completed
+            - if group.judge_task_completed
+              .group__completed--length
+                タスク完了数：
+                = group.show_task_completed_count
+                件
+              .group__completed--latest
+                最新完了日：
+                = group.show_task_completed_latest_dt
+            - else
+              完了タスクはありません。
 
