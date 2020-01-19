@@ -29,54 +29,25 @@
         .main-header__edit-btn Edit
 
   .tasks
-    .task{data: {task: {id: 4}}}
-      .task--normal
-        .task__upper-info
-          %p.task__upper-info__talker
-            ヘッドホンを見に行く。
-          %p.task__upper-info__date
-            2020/01/12 12:00:00
-        .task__lower-info
-          %p.task__lower-info__target
-            期限日: 2020/01/26 16:00
-          %p.task__lower-info__complete
-            完了日: 未達
-    .task{data: {task: {id: 3}}}
-      .task--warning
-        .task__upper-info
-          %p.task__upper-info__talker
-            お弁当を作る。
-          %p.task__upper-info__date
-            2020/01/05 12:00:00
-        .task__lower-info
-          %p.task__lower-info__target
-            期限日: 2020/01/15 07:30
-          %p.task__lower-info__complete
-            完了日: 未達
-    .task{data: {task: {id: 2}}}
-      .task--overdue
-        .task__upper-info
-          %p.task__upper-info__talker
-            お弁当を作る。
-          %p.task__upper-info__date
-            2020/01/05 12:00:00
-        .task__lower-info
-          %p.task__lower-info__target
-            期限日: 2020/01/10 07:30
-          %p.task__lower-info__complete
-            完了日: 未達
-    .task{data: {task: {id: 1}}}
-      .task--complete
-        .task__upper-info
-          %p.task__upper-info__talker
-            振り込みをする。
-          %p.task__upper-info__date
-            2020/01/05 12:00:00
-        .task__lower-info
-          %p.task__lower-info__target
-            期限日: 2020/01/08 10:30
-          %p.task__lower-info__complete
-            完了日: 2020/01/08 10:10
+    - @tasks.each do |task|
+      .task{data: {task: {id: task.id}}}
+        .task--normal
+          .task__upper-info
+            %p.task__upper-info__talker
+              = task.title
+            %p.task__upper-info__date
+              = I18n.l(task.created_at)
+          .task__lower-info
+            %p.task__lower-info__target
+              期限日：
+              = I18n.l(task.target_dt)
+              = I18n.l(task.target_tm, format: :tiny)
+            %p.task__lower-info__complete
+              完了日： 
+              - if task.completed.present?
+                = I18n.l(task.complete_at)
+              - else
+                未達
 
   .form
     .form__task-name
