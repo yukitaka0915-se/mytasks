@@ -28,6 +28,10 @@
           background-color: $task_color_complete;
           margin-left: $marginleft_interval;
         }
+        &--pending{
+          background-color: $task_color_pending;
+          margin-left: $marginleft_interval;
+        }
         &--warning{
           background-color: $task_color_warning;
           margin-left: $marginleft_interval;

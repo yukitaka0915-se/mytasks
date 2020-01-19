@@ -12,11 +12,17 @@
           完了数：
           = @tasks_completed.count
           件
+        %li.main-header__left-box__task-list--pending
+          未完了数：
+          = @tasks_pending.count
+          件
         %li.main-header__left-box__task-list--warning
           期限間近：
+          = @tasks_warning.count
           件
         %li.main-header__left-box__task-list--overdue
           期限切れ：
+          = @tasks_overdue.count
           件
     - if @group.authority == false
       = link_to edit_group_path(@group.id) do

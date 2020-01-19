@@ -9,8 +9,27 @@ class Task < ApplicationRecord
     where(user: user_id).where(group: group_id)
   }
 
-  scope :search_completed, -> (user_id, group_id){
-    search_all(user_id, group_id).where(completed: true)
+  scope :search_completed, -> {
+    has_completed(true)
   }
+
+  scope :search_pending, -> {
+    has_completed(false)
+  }
+
+  scope :search_warning, -> {
+    has_completed(false).where('warning_dt <= ?', "current_date()")
+  }
+
+  scope :search_overdue, -> {
+    has_completed(false).where('target_dt < ?', "current_date()")
+  }
+
+  private
+
+  scope :has_completed, -> (flag){
+    where(completed: flag)
+  }
+
 
 end

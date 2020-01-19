@@ -31,7 +31,10 @@ class TasksController < ApplicationController
 
   def set_tasks
     @tasks = Task.search_all(params[:group_id], current_user.id)
-    @tasks_completed = Task.search_completed(params[:group_id], current_user.id)
+    @tasks_completed = @tasks.search_completed
+    @tasks_pending = @tasks.search_pending
+    @tasks_warning = @tasks.search_warning
+    @tasks_overdue = @tasks.search_overdue
   end
 
 end
