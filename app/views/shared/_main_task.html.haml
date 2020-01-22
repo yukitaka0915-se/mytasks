@@ -36,7 +36,7 @@
             %p.task__upper-info__talker
               = task.title
             %p.task__upper-info__date
-              = I18n.l(task.created_at)
+              = task.created_at.to_s(:datetime)
           .task__lower-info
             %p.task__lower-info__target
               期限日：
@@ -45,13 +45,20 @@
             %p.task__lower-info__complete
               完了日： 
               - if task.completed.present?
-                = I18n.l(task.complete_at)
+                = task.complete_at.to_s(:datetime)
               - else
                 未達
+          .task__hidden-info
+
 
   .form
-    .form__task-name
-      ヘッドホンを見に行く。
+    =form_with(model: task, local: true) do |f|
+      = f.label :title, class = 'form__task-title' method, text, {"タスクのタイトル"}
+      = f.label :title, class = 'form__task-title method, text, {}
+       = f.label :image, class: 'input-box__image' do
+      = f.text_field :body, class: 'input-box__text', placeholder: 'type a message'
+    
+      タスクのタイトル
     %form{target: "#"}
       .field
         %table
@@ -67,7 +74,7 @@
             %th.field__title 完了日
           %tr
             %td
-              %input.field__text--completed{value: "", name: "task[completed]", type: "checkbox"}/
+              %input.field__text--completed{value: "", name: "task[completed]", type: "checkbox", class: 'completed'}/
             %td
               %select.field__text--priority_id{name: "priority_id"}
                 %option{value: "0"} --

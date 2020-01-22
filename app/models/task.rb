@@ -22,7 +22,7 @@ class Task < ApplicationRecord
   }
 
   scope :search_overdue, -> {
-    has_completed(false).where('target_dt < ?', "current_date()")
+    has_completed(false).where('target_dt > ?', "current_date()")
   }
 
   private

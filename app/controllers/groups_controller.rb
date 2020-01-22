@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  include ReminderExists
   before_action :get_group, only: [:index]
   before_action :set_group, only: [:edit, :update, :destroy]
 
@@ -34,7 +33,7 @@ class GroupsController < ApplicationController
       render :edit, notice: 'グループが削除できませんでした。'
     end
   end
-
+4
   private
 
   def group_params
@@ -43,7 +42,6 @@ class GroupsController < ApplicationController
 
   def get_group
     @group = Group.has_with_mytasklist(current_user.id).order("id")
-    reminder_exists
   end
 
   def set_group
