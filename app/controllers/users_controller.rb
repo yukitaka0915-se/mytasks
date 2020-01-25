@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  after_action :user_signup, only:[:create]
+  after_action :after_signup, only:[:create]
 
   def index
   end
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email)
   end
 
-  def user_signup
+  def after_signup
     redirect_to root_path
   end
 

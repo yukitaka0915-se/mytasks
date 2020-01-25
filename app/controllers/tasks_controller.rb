@@ -22,11 +22,22 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:body, :image).merge(user_id: current_user.id)
+    params.require(:task).permit(
+        :title,
+        :description,
+        :place,
+        :completed,
+        :priority_id,
+        :target_dt,
+        :target_tm,
+        :warning_st_days,
+        :group_id
+    ).merge(user_id: current_user.id)
   end
 
   def set_group
     @group = Group.find(params[:group_id])
+    @groups = Group.find_by(name: params[:user_id])
   end
 
   def set_tasks

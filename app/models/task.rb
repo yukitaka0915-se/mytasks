@@ -2,7 +2,9 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :title, presence: true
 
   # カレントユーザーとカレントタスクリストの総数を取得する。
   scope :search_all, -> (user_id, group_id){

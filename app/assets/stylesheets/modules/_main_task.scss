@@ -108,40 +108,83 @@
   
   .form{
     height: $form_height;
-    padding: 20px 40px;
+    padding: 5px 40px;
     background-color:#ddd;
+
     &__task-name{
       font-size: 16px;
       font-weight: bold;
       margin-bottom: 20px;
     }
+
     form{
+      table{
+        width: 100%;
+      }
       @include flexbox;
       .field{
         position: relative;
         width: $WidthMax;
         font-size: 14px;
+
+        $th_width_title: 60px;
+        $fld_width_title: 100%;
+  
+        $th_width_description: $th_width_title;
+        $fld_width_description: $fld_width_title;
+  
+        $th_width_place: $th_width_title;
+        $fld_width_place: $fld_width_title;
+  
+        $th_width_completed: 40px;
+        $fld_width_completed: 20px;
+  
+        $th_width_priority_id: 90px;
+        $fld_width_priority_id: 80px;
+  
+        $th_width_target_dt: 150px;
+        $fld_width_target_dt: $th_width_target_dt - 10px;
+  
+        $th_width_target_tm: 80px;
+        $fld_width_target_tm: $th_width_target_tm;
+
+        $th_width_twarning_st_days: 100px;
+        $fld_width_warning_st_days: 30px;
+
+        &__label{
+          height: 10px;
+          width: $th_width_title;
+          line-height: 10px;
+        }
+
         &__title{
           height: 10px;
           width: 140px;
-          // padding: 0 40px 0 10px;
+          line-height: 10px;
           color: $main_color_darkgray;
-          border-style: none;
 
           &--completed{
-            width: 40px;
+            width: $th_width_completed;
           }
 
           &--priority_id{
-            width: 90px;
+            width: $th_width_priority_id;
           }
 
-          &--description{
-            width: 200px;
+          &--target_dt{
+            width: $th_width_target_dt;
+          }
+
+          &--target_tm{
+            width: $th_width_target_tm;
           }
 
           &--warning_st_days{
-            width: 100px;
+            width: $th_width_twarning_st_days;
+          }
+
+          &--tasklist{
+            width: 140px;
           }
           
         }
@@ -151,27 +194,49 @@
           width: 120px;
           // padding: 0 40px 0 10px;
           color: $main_color_darkgray;
-          border-style: none;
 
-          &--completed{
-            width: 20px;
-          }
-
-          &--priority_id{
-            width: 80px;
+          &--title{
+            margin: 5px 0px;
+            padding: 5px;
+            width: $fld_width_title;
           }
 
           &--description{
-            height: 40px;
-            width: 180px;
+            margin: 5px 0px;
+            padding: 5px;
+            width: $fld_width_description;
+          }
+
+          &--place{
+            margin: 5px 0px;
+            padding: 5px;
+            width: $fld_width_place;
+          }
+
+          &--completed{
+            width: $fld_width_completed;
+          }
+
+          &--priority_id{
+            width: $fld_width_priority_id;
+          }
+
+          &--date{
+            width: $fld_width_target_dt;
+          }
+
+          &--time{
+            width: $fld_width_target_tm;
           }
 
           &--warning_st_days{
-            width: 30px;
+            width: $fld_width_warning_st_days;
           }
 
         }
+
       }
+
       .submit-btn{
         width: 100px;
         height: 50px;

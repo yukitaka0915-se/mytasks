@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_create :create_initial_group
+  after_update :update_initial_group
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -22,6 +23,14 @@ class User < ApplicationRecord
       authority: true
     )
     group.save!
+  end
+
+  # User更新直後に、タスクリスト「リマインダー」の名前を変更する
+  def update_initial_group
+    group = groups.where(user_id: id).where(authority: true)
+    group.update(
+      name: name + "のリマインダー"
+    )
   end
 
 end

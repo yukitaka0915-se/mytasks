@@ -25,7 +25,7 @@
           = @tasks_overdue.count
           件
     - if @group.authority == false
-      = link_to edit_group_path(@group.id) do
+      = link_to edit_group_path(@group) do
         .main-header__edit-btn Edit
 
   .tasks
@@ -52,51 +52,44 @@
 
 
   .form
-    =form_with(model: task, local: true) do |f|
-      = f.label :title, class = 'form__task-title' method, text, {"タスクのタイトル"}
-      = f.label :title, class = 'form__task-title method, text, {}
-       = f.label :image, class: 'input-box__image' do
-      = f.text_field :body, class: 'input-box__text', placeholder: 'type a message'
-    
-      タスクのタイトル
-    %form{target: "#"}
-      .field
-        %table
+    = form_with(model: @task, url: new_group_task_path) do |f| 
+      - colspanlength = "5"
+      %table
+        %tbody
+          %tr
+            %td.field__label
+              %label タイトル：
+            %td{colspan: colspanlength}
+              = f.text_field :title, class: 'field__text--title', placeholder: "type a title", value: @task.title 
+          %tr
+            %td.field__label
+              %label 内容：
+            %td{colspan: colspanlength}
+              = f.text_field :description, class: 'field__text--description', placeholder: "type a description", value: @task.description 
+          %tr
+            %td.field__label
+              %label 場所：
+            %td{colspan: colspanlength}
+              = f.text_field :place, class: 'field__text--place', placeholder: "type a place", value: @task.place 
           %tr
             %th.field__title--completed 完了
             %th.field__title--priority_id 重要度
-            %th.field__title--description タスクの内容
-            %th.field__title 場所
-            %th.field__title 期限日
-            %th.field__title 期限時刻
-            %th.field__title--warning_st_days 警告
-            %th.field__title タスクリスト
-            %th.field__title 完了日
+            %th.field__title--target_dt 期限日
+            %th.field__title--target_tm 期限時刻
+            %th.field__title--warning_st_days 警告開始日数
+            %th.field__title--tasklist タスクリスト
           %tr
             %td
-              %input.field__text--completed{value: "", name: "task[completed]", type: "checkbox", class: 'completed'}/
+              = f.check_box :completed, class: 'field__text--completed', value: @task.completed 
             %td
-              %select.field__text--priority_id{name: "priority_id"}
-                %option{value: "0"} --
-                %option{selected: "selected", value: "1"} 重要度1
-                %option{value: "2"} 重要度2
-                %option{value: "3"} 重要度3
+              = f.select :priority_id, [["--", 0], ["重要度1", 1], ["重要度2", 2], ["重要度3",3]], selected: @task.priority_id, class: 'field__combo--priority'
             %td
-              %input.field__text--description{value: "お店で視聴しながら決める。", name: "task[description]", placeholder: "type a description", type: "textarea"}
+              = f.date_field :target_dt, class: 'field__text--date', value: @task.target_dt
             %td
-              %input.field__text{value: "秋葉原", name: "task[place]", placeholder: "type a place", type: "text"}
+              = f.time_field :target_tm, class: 'field__text--time', value: @task.target_tm
             %td
-              %input.field__text{value: "2020-01-26", name: "task[target_dt]", type: "date"}
+              = f.number_field :warning_st_days, class: 'field__text--warning_st_days', max: 31, min: 1, value: @task.warning_st_days 
+              日前
             %td
-              %input.field__text{value: "16:00", name: "task[target_dt]", type: "time"}
-            %td
-              %input.field__text--warning_st_days{value: "7", name: "task[warning_st_days]", type: "number"}日前
-            %td
-              %select.field__text--group_id{name: "group_id"}
-                %option{selected: "selected", value: "1"} リマインダー
-                %option{value: "2"} sample1
-                %option{value: "3"} sample2
-                %option{value: "4"} sample3
-            %td
-              %label.field__label 未達 
+              = f.select :group_id, current_user.groups.map { |gourp| [gourp.name, gourp.id] }, selected: @group.id, class: 'field__combo--tasklist'
       %input.submit-btn{name: "commit", type: "submit", value: "Save"}
