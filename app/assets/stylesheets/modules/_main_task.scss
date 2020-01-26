@@ -151,7 +151,7 @@
 
         $fld_height: 30px;
 
-        $th_width_title: 100px;
+        $th_width_title: 110px;
         $fld_width_title: 100%;
         
         $th_width_description: $th_width_title;
@@ -169,10 +169,10 @@
         $th_width_target_dt: 160px;
         $fld_width_target_dt: $th_width_target_dt - 10px;
         
-        $th_width_target_tm: 120px;
-        $fld_width_target_tm: $th_width_target_tm;
+        $th_width_target_tm: 220px;
+        $fld_width_target_tm: 40px;
 
-        $th_width_warning_st_days: 100px;
+        $th_width_warning_st_days: 120px;
         $fld_width_warning_st_days: 50px;
 
         $th_width_tasklist: 180px;
@@ -228,7 +228,6 @@
         
         &__text{
           height: 40px;
-          width: 120px;
           color: $main_color_darkgray;
           border-style: none;
 
@@ -258,15 +257,13 @@
           &--target_dt{
             height: $fld_height;
             width: $fld_width_target_dt;
-            display: block;
             position: relative;
             margin: auto;
           }
 
           &--target_tm{
-            height: $fld_height;
-            width: $fld_width_target_tm;
-            display: block;
+            height: 30px;
+            width: 60px;
             position: relative;
             margin: 0 auto;
           }
