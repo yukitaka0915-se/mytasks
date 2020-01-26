@@ -33,5 +33,4 @@ class Task < ApplicationRecord
     where(completed: flag)
   }
 
-
 end

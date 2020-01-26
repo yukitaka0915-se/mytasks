@@ -29,30 +29,10 @@
         .main-header__edit-btn Edit
 
   .tasks
-    - @tasks.each do |task|
-      .task{data: {task: {id: task.id}}}
-        .task--normal
-          .task__upper-info
-            %p.task__upper-info__talker
-              = task.title
-            %p.task__upper-info__date
-              = task.created_at.to_s(:datetime)
-          .task__lower-info
-            %p.task__lower-info__target
-              期限日：
-              = I18n.l(task.target_dt)
-              = I18n.l(task.target_tm, format: :tiny)
-            %p.task__lower-info__complete
-              完了日： 
-              - if task.completed.present?
-                = task.complete_at.to_s(:datetime)
-              - else
-                未達
-          .task__hidden-info
-
+    = render 'tasks', { tasks: @tasks }
 
   .form
-    = form_with(model: @task, url: new_group_task_path) do |f| 
+    = form_with(model: [@group, @task], url: group_tasks_path(@group.id), method: "POST", local: true) do |f| 
       - colspanlength = "5"
       %table
         %tbody
@@ -91,5 +71,5 @@
               = f.number_field :warning_st_days, class: 'field__text--warning_st_days', max: 31, min: 1, value: @task.warning_st_days 
               日前
             %td
-              = f.select :group_id, current_user.groups.map { |gourp| [gourp.name, gourp.id] }, selected: @group.id, class: 'field__combo--tasklist'
-      %input.submit-btn{name: "commit", type: "submit", value: "Save"}
+              = f.select :group_id, @groups.map { |gourp| [gourp.name, gourp.id] }, selected: @group.id, class: 'field__combo--tasklist'
+      = f.submit class: 'submit-btn', id: 'new_task', name: "commit", value: "Save" 

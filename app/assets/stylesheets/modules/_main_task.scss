@@ -1,47 +1,56 @@
 .task-main{
   width: $main_width;
   float: left;
+
   .main-header{
-    // background-color: $main_back_color;
     height: $header_height;
     padding: $padding_TB0_LR40px;
     @include flexbox;
     @include justify-content(space-between);
     border-bottom: solid 1px #eeeeee;
     overflow: scroll;
+    
     &__left-box{
       margin-top: 25px;
       margin-bottom:10px;
+
       &__current-group{
         font-size: 20px;
         color: $main_color_blackInk;
       }
+
       &__task-list{
         @include flexbox;
         font-size: 12px;
         list-style: none;
+
         &--total{
           background-color: $light_green;
           margin-left: $marginleft_interval;
         }
+
         &--complete{
           background-color: $task_color_complete;
           margin-left: $marginleft_interval;
         }
+
         &--pending{
           background-color: $task_color_pending;
           margin-left: $marginleft_interval;
         }
+
         &--warning{
           background-color: $task_color_warning;
           margin-left: $marginleft_interval;
         }
+        
         &--overdue{
           background-color: $task_color_overdue;
           margin-left: $marginleft_interval;
-       }
+        }
       }
     }
+
     &__edit-btn{
       height: $editButton_hight;
       line-height: $editButton_hight;
@@ -51,61 +60,74 @@
       position: absolute;
       right: $editButton_maginRight;
     }
+
     a{
       color: $light_green;
       &:active{
         color: $light_green;
       }
     }
-    
   }
+
   .tasks{
     height: $mainTasks_hight;
     padding: 20px 40px;
     background-color: $main_back_color;
-    // background-color: #f0f0f0;
     overflow: scroll;
+
     .task{
       padding-bottom: 20px;
+
       &__upper-info{
         @include flexbox;
         margin-bottom: 10px;
+
         &__talker{
           color:$main_color_darkgray;
           font-size: 16px;
           font-weight: bold;
         }
+
         &__date{
           color:$main_color_darkgray;
           font-size: 12px;
           margin-left: 10px;
         }
+
       }
+
       &__lower-info{
         color: $main_color_darkgray;
+
         &__target{
           font-size: 12px;
         }
+
         &__complete{
           font-size: 12px;
           margin-bottom: 10px;
         }
+
       }
+
       &--normal{
         background-color: $task_color_normal;
       }
+
       &--complete{
         background-color: $task_color_complete;
       }
+
       &--warning{
         background-color: $task_color_warning;
       }
+
       &--overdue{
         background-color: $task_color_overdue;
       }
     } 
   }
-  
+
   .form{
     height: $form_height;
     padding: 5px 40px;
@@ -126,30 +148,33 @@
         position: relative;
         width: $WidthMax;
         font-size: 14px;
-
+        
         $th_width_title: 60px;
         $fld_width_title: 100%;
-  
+        
         $th_width_description: $th_width_title;
         $fld_width_description: $fld_width_title;
-  
+        
         $th_width_place: $th_width_title;
         $fld_width_place: $fld_width_title;
-  
+        
         $th_width_completed: 40px;
         $fld_width_completed: 20px;
-  
+        
         $th_width_priority_id: 90px;
         $fld_width_priority_id: 80px;
-  
+
         $th_width_target_dt: 150px;
         $fld_width_target_dt: $th_width_target_dt - 10px;
-  
+        
         $th_width_target_tm: 80px;
         $fld_width_target_tm: $th_width_target_tm;
 
         $th_width_twarning_st_days: 100px;
         $fld_width_warning_st_days: 30px;
+
+        $th_width_tasklist: 180px;
+        $fld_width_tasklist: $th_width_tasklist;
 
         &__label{
           height: 10px;
@@ -184,15 +209,14 @@
           }
 
           &--tasklist{
-            width: 140px;
+            width: $th_width_tasklist;
           }
-          
+
         }
         
         &__text{
           height: 20px;
           width: 120px;
-          // padding: 0 40px 0 10px;
           color: $main_color_darkgray;
 
           &--title{
@@ -217,10 +241,6 @@
             width: $fld_width_completed;
           }
 
-          &--priority_id{
-            width: $fld_width_priority_id;
-          }
-
           &--date{
             width: $fld_width_target_dt;
           }
@@ -235,13 +255,26 @@
 
         }
 
+        &__combo{
+          height: 20px;
+          width: 120px;
+          color: $main_color_darkgray;
+
+          &--priority_id{
+            width: $fld_width_priority_id;
+          }
+
+          &--tasklist{
+            width: $th_width_tasklist;
+          }
+        }
       }
 
       .submit-btn{
         width: 100px;
         height: 50px;
         padding: 0 30px;
-        margin-left: 15px;
+        margin: 50px 15px;
         background-color: $light_green;
         color:$FontCcolor_default;
         cursor: pointer;

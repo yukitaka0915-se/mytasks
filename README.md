@@ -67,7 +67,7 @@ Things you may want to cover:
 |warning_st_days|integer||
 |warning_dt|date|index: true|
 |completed|boolean|default: false|
-|complete_at|datetime||
+|completed_at|datetime||
 |group|references|null: false, foreign_key: true|
 |user|references|null: false, foreign_key: true|
 

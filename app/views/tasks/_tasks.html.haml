@@ -1,0 +1,19 @@
+- tasks.each do |task|
+  .task{data: {task: {id: task.id}}}
+    .task--normal
+      .task__upper-info
+        %p.task__upper-info__talker
+          = task.title
+        %p.task__upper-info__date
+          = task.created_at.to_s(:datetime)
+      .task__lower-info
+        %p.task__lower-info__target
+          期限日：
+          = task.target_dt.to_s(:date) unless task.target_dt.nil?
+          = task.target_tm.to_s(:time) unless task.target_tm.nil?
+        %p.task__lower-info__complete
+          完了日： 
+          - if task.completed.present?
+            = task.completed_at.to_s(:datetime) unless task.completed_at.nil?
+          - else
+            未達

@@ -27,7 +27,8 @@ class Group < ApplicationRecord
 
   def show_task_completed_latest_dt
     if (task_completed = judge_completed).present?
-      I18n.l(task_completed.last.completed_at)
+      latest = task_completed.last
+      latest.completed_at.to_s(:datetime) unless latest.completed_at.nil?
     end
   end
 
