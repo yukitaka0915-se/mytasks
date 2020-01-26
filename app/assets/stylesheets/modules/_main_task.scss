@@ -169,8 +169,8 @@
         $th_width_target_dt: 160px;
         $fld_width_target_dt: $th_width_target_dt - 10px;
         
-        $th_width_target_tm: 220px;
-        $fld_width_target_tm: 40px;
+        $th_width_target_tm: 100px;
+        $fld_width_target_tm: 80px;
 
         $th_width_warning_st_days: 120px;
         $fld_width_warning_st_days: 50px;
@@ -262,10 +262,11 @@
           }
 
           &--target_tm{
-            height: 30px;
-            width: 60px;
+            height: $fld_height;
+            width: $fld_width_target_tm;
+            margin:auto;
             position: relative;
-            margin: 0 auto;
+            text-align: center;            
           }
 
           &--warning_st_days{
