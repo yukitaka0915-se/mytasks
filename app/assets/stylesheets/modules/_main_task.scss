@@ -130,7 +130,7 @@
 
   .form{
     height: $form_height;
-    padding: 5px 40px;
+    padding: 20px 40px;
     background-color:#ddd;
 
     &__task-name{
@@ -140,16 +140,18 @@
     }
 
     form{
-      table{
-        width: 100%;
-      }
       @include flexbox;
+      tr{
+        height: 40px;
+      }
       .field{
         position: relative;
         width: $WidthMax;
         font-size: 14px;
-        
-        $th_width_title: 60px;
+
+        $fld_height: 30px;
+
+        $th_width_title: 100px;
         $fld_width_title: 100%;
         
         $th_width_description: $th_width_title;
@@ -164,112 +166,131 @@
         $th_width_priority_id: 90px;
         $fld_width_priority_id: 80px;
 
-        $th_width_target_dt: 150px;
+        $th_width_target_dt: 160px;
         $fld_width_target_dt: $th_width_target_dt - 10px;
         
-        $th_width_target_tm: 80px;
+        $th_width_target_tm: 120px;
         $fld_width_target_tm: $th_width_target_tm;
 
-        $th_width_twarning_st_days: 100px;
-        $fld_width_warning_st_days: 30px;
+        $th_width_warning_st_days: 100px;
+        $fld_width_warning_st_days: 50px;
 
         $th_width_tasklist: 180px;
         $fld_width_tasklist: $th_width_tasklist;
 
         &__label{
-          height: 10px;
+          height: 20px;
           width: $th_width_title;
-          line-height: 10px;
+          text-align: right;
         }
 
         &__title{
-          height: 10px;
-          width: 140px;
-          line-height: 10px;
+          height: 20px;
+          width: $th_width_title;
           color: $main_color_darkgray;
+          text-align: center;
 
           &--completed{
             width: $th_width_completed;
+            text-align: center;
           }
 
           &--priority_id{
             width: $th_width_priority_id;
+            text-align: center;
           }
 
           &--target_dt{
             width: $th_width_target_dt;
+            text-align: center;
           }
 
           &--target_tm{
             width: $th_width_target_tm;
+            text-align: center;
           }
 
           &--warning_st_days{
-            width: $th_width_twarning_st_days;
+            width: $th_width_warning_st_days;
+            text-align: center;
           }
 
           &--tasklist{
             width: $th_width_tasklist;
+            text-align: center;
           }
 
+          &--completed_at{
+            width: $th_width_tasklist;
+            text-align: center;
+          }
         }
         
         &__text{
-          height: 20px;
+          height: 40px;
           width: 120px;
           color: $main_color_darkgray;
+          border-style: none;
 
           &--title{
-            margin: 5px 0px;
-            padding: 5px;
+            height: $fld_height;
             width: $fld_width_title;
           }
 
           &--description{
-            margin: 5px 0px;
-            padding: 5px;
+            height: $fld_height;
             width: $fld_width_description;
           }
 
           &--place{
-            margin: 5px 0px;
-            padding: 5px;
+            height: $fld_height;
             width: $fld_width_place;
           }
 
           &--completed{
             width: $fld_width_completed;
+            display: block;
+            position: relative;
+            margin: auto;
+            
           }
 
-          &--date{
+          &--target_dt{
+            height: $fld_height;
             width: $fld_width_target_dt;
+            display: block;
+            position: relative;
+            margin: auto;
           }
 
-          &--time{
+          &--target_tm{
+            height: $fld_height;
             width: $fld_width_target_tm;
+            display: block;
+            position: relative;
+            margin: 0 auto;
           }
 
           &--warning_st_days{
+            height: $fld_height;
             width: $fld_width_warning_st_days;
           }
-
         }
 
         &__combo{
-          height: 20px;
-          width: 120px;
           color: $main_color_darkgray;
 
           &--priority_id{
+            height: $fld_height;
             width: $fld_width_priority_id;
           }
 
           &--tasklist{
+            height: $fld_height;
             width: $th_width_tasklist;
           }
         }
       }
-
       .submit-btn{
         width: 100px;
         height: 50px;

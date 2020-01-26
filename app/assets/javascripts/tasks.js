@@ -87,6 +87,11 @@ $(function(){
     })
     .done(function(task){
       // 通信成功時の処理
+      // 投稿されたメッセージをjsonからhtmlに生成する。
+      // let html = buildHTML(message);
+      // // 生成したhtmlをmessages要素の最後に追加して、一番下にスクロールする。
+      // // メッセージテキスト、画像テキストの内容をクリアする。
+      // resetmessageform('.messages', html, '#new_message');
     })
     .fail(function () {
       // 通信失敗時の処理
@@ -98,4 +103,5 @@ $(function(){
     });
   })
 
- });
+});
+
