@@ -33,7 +33,7 @@
 
   .form
     -# = form_for [@group, @task] do |f|
-    = form_with(model: [@group, @task] , url: group_tasks_path(@group.id), method: "POST") do |f| 
+    = form_with(model: [@group, @task] , url: group_tasks_path(@group.id), method: "POST", local: true) do |f| 
       - colspanlength = "6"
       %table
         %tbody

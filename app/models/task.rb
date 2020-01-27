@@ -2,6 +2,9 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
+  before_create :task_data
+  before_update :task_data
+
   validates :title, presence: true
 
   # カレントユーザーとカレントタスクリストの総数を取得する。
@@ -25,10 +28,18 @@ class Task < ApplicationRecord
     has_completed(false).where('target_dt > ?', "current_date()")
   }
 
+
   private
 
   scope :has_completed, -> (flag){
     where(completed: flag)
   }
+
+  def task_data
+    unless self.target_dt == nil and self.warning_st_days == nil
+      self.warning_dt = self.target_dt - self.warning_st_days 
+    end
+    self.completed_at = Time.now if self.completed == true
+  end
 
 end

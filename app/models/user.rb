@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  after_create :create_initial_group
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,6 +7,8 @@ class User < ApplicationRecord
   has_many :groups, dependent: :destroy
   # has_many :groups, dependent: :restrict_with_error
   has_many :tasks, dependent: :destroy
+
+  after_create :create_initial_group
 
 
 
