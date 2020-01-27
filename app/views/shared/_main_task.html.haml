@@ -32,9 +32,10 @@
     = render 'tasks', { tasks: @tasks }
 
   .form
-    -# = form_for [@group, @task] do |f|
-    = form_with(model: [@group, @task] , url: group_tasks_path(@group.id), method: "POST", local: true) do |f| 
+    -# = form_with(model: [@group, @task] , url: group_tasks_path(@group.id), method: "POST", local: true) do |f| 
+    = form_with(model: [@group, @task] , url: group_task_path(@group.id, 1), method: "PATCH", local: true) do |f| 
       - colspanlength = "6"
+      = f.hidden_field :id, id: '#field__hidden--id', value: 1
       %table
         %tbody
           %tr

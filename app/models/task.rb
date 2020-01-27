@@ -31,10 +31,12 @@ class Task < ApplicationRecord
 
   private
 
+  # タスク完了の成否を絞り込むscope
   scope :has_completed, -> (flag){
     where(completed: flag)
   }
 
+  # create、updateの前にデータを加工する。
   def task_data
     unless self.target_dt == nil and self.warning_st_days == nil
       self.warning_dt = self.target_dt - self.warning_st_days 

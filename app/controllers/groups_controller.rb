@@ -33,7 +33,7 @@ class GroupsController < ApplicationController
       render :edit, notice: 'グループが削除できませんでした。'
     end
   end
-4
+
   private
 
   def group_params

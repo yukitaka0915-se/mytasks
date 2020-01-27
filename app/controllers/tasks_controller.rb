@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   before_action :get_group, :get_tasks, except: [:show]
+  before_action :set_task, only: [:edit, :update, :destroy]
+
   def index
     @task = Task.new
   end
@@ -17,10 +19,20 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    if @task.update(task_params)
+      redirect_to root_path, notice: "タスクが更新されました。"
+    else
+      flash.now[:alert] = "タスクを入力してください。"
+      render :index
+    end
+  end
+
   private
 
   def task_params
     params.require(:task).permit(
+      :id,
       :title,
       :description,
       :place,
@@ -46,6 +58,10 @@ class TasksController < ApplicationController
     @tasks_pending = @tasks.search_pending
     @tasks_warning = @tasks.search_warning
     @tasks_overdue = @tasks.search_overdue
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
   end
 
 end
