@@ -64,7 +64,7 @@ class TasksController < ApplicationController
     ).merge(
       user_id: current_user.id
     )
-    binding.pry
+    
   end
 
   def get_group

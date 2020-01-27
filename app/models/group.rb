@@ -3,7 +3,7 @@ class Group < ApplicationRecord
   has_many :tasks, dependent: :destroy
   # has_many :tasks, dependent: :restrict_with_error
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   # カレントユーザーのタスクリストを検索する。
   scope :has_with_mytasklist, -> (user_id){

@@ -2,7 +2,7 @@
   .main-header
     .main-header__left-box
       %h2.main-header__left-box__current-group
-        = @group.name
+        = @group.name == nil? ? "名前なし" : @group.name
       %ul.main-header__left-box__task-list
         %li.main-header__left-box__task-list--total
           タスク数：
@@ -32,7 +32,8 @@
     = render 'tasks', { tasks: @tasks }
 
   .form
-    = form_with(model: [@group, @task], url: group_tasks_path(@group.id), method: "POST", local: true) do |f| 
+    -# = form_for [@group, @task] do |f|
+    = form_with(model: [@group, @task] , url: group_tasks_path(@group.id), method: "POST") do |f| 
       - colspanlength = "6"
       %table
         %tbody
@@ -40,17 +41,17 @@
             %td.field__label
               %label タイトル：
             %td{colspan: colspanlength}
-              = f.text_field :title, class: 'field__text--title', placeholder: "type a title", value: @task.title 
+              = f.text_field :title, class: 'field__text--title', placeholder: "type a title" 
           %tr
             %td.field__label
               %label 内容：
             %td{colspan: colspanlength}
-              = f.text_field :description, class: 'field__text--description', placeholder: "type a description", value: @task.description 
+              = f.text_field :description, class: 'field__text--description', placeholder: "type a description" 
           %tr
             %td.field__label
               %label 場所：
             %td{colspan: colspanlength}
-              = f.text_field :place, class: 'field__text--place', placeholder: "type a place", value: @task.place 
+              = f.text_field :place, class: 'field__text--place', placeholder: "type a place" 
           %tr
             %th.field__title--completed 完了
             %th.field__title--priority_id 重要度
@@ -61,18 +62,18 @@
             %th.field__title--completed_at 完了日
           %tr
             %td
-              = f.check_box :completed, class: 'field__text--completed', value: @task.completed
+              = f.check_box :completed, class: 'field__text--completed'
             %td
-              = f.select :priority_id, [["--", 0],["重要度1", 1],["重要度2", 2],["重要度3", 3]], {selected: @task.priority_id}, { id: "priority_id", class: 'field__combo--priority_id' } 
+              = f.select :priority_id, [["--", 0],["重要度1", 1],["重要度2", 2],["重要度3", 3]], {}, { id: "priority_id", class: 'field__combo--priority_id' } 
             %td
-              = f.date_field :target_dt, class: 'field__text--target_dt', value: @task.target_dt 
+              = f.date_field :target_dt, class: 'field__text--target_dt'
             %td
-              = f.time_field :target_tm, class: 'field__text--target_tm', value: @task.target_tm 
+              = f.time_field :target_tm, class: 'field__text--target_tm' 
             %td
-              = f.number_field :warning_st_days, min: 1, max: 31, class: 'field__text--warning_st_days', value: @task.warning_st_days
+              = f.number_field :warning_st_days, min: 1, max: 31, class: 'field__text--warning_st_days'
               日前 
             %td
               = f.select :group_id, @groups.map { |gourp| [gourp.name, gourp.id] }, {selected: @group.id}, { id: "group_id", class: 'field__combo--tasklist' } 
             %td.field__text--completed_at
-              = @task.completed_at
-      = f.submit class: 'submit-btn', id: 'new_task', name: "commit", value: "Save" 
+      = f.submit 'Save', class: 'submit-btn'
+
