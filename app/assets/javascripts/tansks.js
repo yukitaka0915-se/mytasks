@@ -1,5 +1,34 @@
 $(function(){
+
+  //トークンの取得 
+  let csrfToken = function (){
+    let metaDiscre = document.head.children;
+    let metaLength = metaDiscre.length;
+    let csrf_token = "";
+    for(let i = 0;i < metaLength;i++){
+      let proper = metaDiscre[i].getAttribute('name');
+      if(proper === 'csrf-token'){
+        csrf_token = metaDiscre[i].content;
+      }
+    };
+    return csrf_token;
+  }; 
+
+  //親要素の削除
+  function removePrentElement(element) {
+    //親要素の削除
+    $(element)
+      .parent()
+      .remove();
+  }
   
+  let group_id = function(elemnt) {
+    return elemnt.attr('data-group-id');
+  }
+  let user_id = function(elemnt) {
+    return elemnt.attr('data-user-id');
+  }
+
   // // ajaxでdoneの場合の共通終了処理。
   // let resetmessageform = function (input, insertHTML, resetarea) {
   //   //メッセージが入ったHTMLに入れ物ごと追加して、一番下にスクロールする。
@@ -38,12 +67,42 @@ $(function(){
   //   return html;
   // };
 
-  // // Message孫要素
-  // let mainMassageHTML = function(buildhtml) {
-  //   let html = `<div class="message__lower-info">${buildhtml}</div>`
-  //   return html;
-  // };
-  
+  const task_form = $('#task_form');
+
+  // タスク新規登録フォーム
+  let resetnewform = function (url) {
+    let cftkn  =  csrfToken();
+    let deletebtn = $('#submit-btn__delete');
+    console.log(url);
+    console.log(cftkn);
+    console.log(hdn);
+    //formを新規登録用に配置する。
+    task_form.attr({id: "new_task", action: url, method: "POST"});
+    //formを新規登録用に配置する。
+    removePrentElement(deletebtn);
+  };
+
+  let resetupdateform = function(url) {
+    '<input name="_method" type="hidden" value="PATCH">'
+  };
+
+  // フォームにタスク削除ボタンを追加する
+  let appendDeletebtn = function(url) {
+  let html = `<a rel='nofollow' data-method='delete' href='${url}'>` +
+                `<div class='submit-btn__delete'>Delete</div>` +
+              `</a>`
+    task_form.append(html);
+  };
+
+  //ユーザーリストの追加用HTMLの生成
+  function newformHTML(element, url) {
+    let html = `<div class='chat-group-user clearfix'>
+                  <p class='chat-group-user__name'>${user_name}</p>
+                  <div class='user-search-add chat-group-user__btn chat-group-user__btn--add' data-user-id='${user_id}' data-user-name='${user_name}'>追加</div>
+                </div>`
+    task_form.append(html);
+  }
+
   // // 投稿メッセージのhtmlを生成する
   // let buildHTML = function(message) {
   //   // upper-infoの生成
@@ -72,8 +131,14 @@ $(function(){
   //   let html = parentMessageHTML(childhtml);
   //   return html;
   // };
+  $('#add_task').on('click', function() {
+    let url = `/groups/${group_id($(this))}/tasks`
+    //タスク登録フォームに切り替え
+    resetnewform(url);
+  });
 
   $('#new_task').on('submit', function(e){
+    console.log('new_task');
     e.preventDefault();
     let formData = new FormData(this);
     let url = $(this).attr('action');
@@ -102,6 +167,7 @@ $(function(){
       sendButtonActivate('.submit-btn');
     });
   })
-
+  // トークンの取得
+  csrfToken();
 });
 

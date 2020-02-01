@@ -59,6 +59,9 @@
       border: solid 2px $light_green;
       position: absolute;
       right: $editButton_maginRight;
+      cursor: pointer;
+      color: $light_green;
+
     }
 
     a{
@@ -68,6 +71,28 @@
       }
     }
   }
+
+  .task_create{
+    height: $taks_create_height + 10px;
+    background-color: $main_back_color;
+
+    &__add-btn{
+      height: $editButton_hight;
+      width: $submitbtn_width;
+      background-color: $white;
+      line-height: $editButton_hight;
+      padding: $padding_TB0_LR20px;
+      border: solid 2px $light_green;
+      position: relative;
+      top: 10px;
+      left: $editButton_maginRight;
+      cursor: pointer;
+      color: $light_green;
+    }
+      
+  }
+
+
 
   .tasks{
     height: $mainTasks_hight;
@@ -127,6 +152,18 @@
       }
     } 
   }
+  .taskcolor_normal{
+    background-color: $task_color_normal;
+  }
+  .taskcolor_complete{
+    background-color: $task_color_complete;
+  }
+  .taskcolor_warning{
+    background-color: $task_color_warning;
+  }
+  .taskcolor_overdue{
+    background-color: $task_color_overdue;
+  }
 
   .form{
     height: $form_height;
@@ -177,6 +214,10 @@
 
         $th_width_tasklist: 180px;
         $fld_width_tasklist: $th_width_tasklist;
+
+        &__table{
+          width: calc( #{$WidthMax} - #{$submitbtn_width * 2} );
+        }
 
         &__label{
           height: 20px;
@@ -289,14 +330,31 @@
           }
         }
       }
-      .submit-btn{
-        width: 100px;
-        height: 50px;
+
+      @mixin submitbtn {
+        width: $submitbtn_width;
+        line-height: 50px;
         padding: 0 30px;
-        margin: 50px 15px;
-        background-color: $light_green;
+        margin: auto 5px;
         color:$FontCcolor_default;
         cursor: pointer;
+        display: inline-block;
+      }      
+
+      #submit-btn{
+
+        &__save{
+          @include submitbtn;
+          background-color: $light_green;
+        }
+
+        &__delete{
+          @include submitbtn;
+          position: relative;
+          margin: 75px 5px;
+          background-color: $task_color_overdue;
+        }
+
       }
     }
   }
