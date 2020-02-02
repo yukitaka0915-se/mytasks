@@ -1,17 +1,21 @@
 class Task < ApplicationRecord
+  # association
   belongs_to :user
   belongs_to :group
 
+  # callback
   before_create :set_taskdata
   before_update :set_taskdata
-
   after_find :get_taskdata
 
+  # validation
   validates :title, presence: true
   validates :priority_id, presence: true
 
+  # インスタンス変数のgetter, setter定義
   attr_accessor :status
 
+  # enum定義
   enum priority_id: {
     "---": 0,
     小: 1,
