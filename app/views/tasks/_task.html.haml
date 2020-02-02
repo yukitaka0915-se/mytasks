@@ -4,12 +4,13 @@
   %p.task__upper-info__date
     = task.created_at.to_s(:datetime)
 .task__lower-info
+  %p.task__lower-info__priority
+    重要度：
+    = task.priority_id
   %p.task__lower-info__target
     期限日：
     = task.target_dt.to_s(:date) unless task.target_dt.nil?
     = task.target_tm.to_s(:time) unless task.target_tm.nil?
-  %p.task__lower-info__complete
-    = task.status
   %p.task__lower-info__complete
     完了日： 
     - unless task.completed.present?

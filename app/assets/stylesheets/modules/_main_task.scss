@@ -124,6 +124,10 @@
       &__lower-info{
         color: $main_color_darkgray;
 
+        &__priority{
+          font-size: 12px;
+        }
+
         &__target{
           font-size: 12px;
         }
@@ -200,8 +204,8 @@
         $th_width_completed: 40px;
         $fld_width_completed: 20px;
         
-        $th_width_priority_id: 90px;
-        $fld_width_priority_id: 80px;
+        $th_width_priority_id: 100px;
+        $fld_width_priority_id: 90px;
 
         $th_width_target_dt: 160px;
         $fld_width_target_dt: $th_width_target_dt - 10px;

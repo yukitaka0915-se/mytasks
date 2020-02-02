@@ -9,18 +9,16 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task_params)
-    redirect_to group_tasks_path(@group), notice: "タスクが更新されました。"
-    # @task = Task.new(task_params)
-    # if @task.save
-    #   respond_to do |format|
-    #     format.any { redirect_to group_tasks_path(@group), notice: "タスクが作成されました" }
-    #     format.json 
-    #   end
-    # else
-    #   flash.now[:alert] = "タスクを入力してください。"
-    #   render :index
-    # end
+    @task = Task.new(task_params)
+    if @task.save
+      respond_to do |format|
+        format.html { redirect_to group_tasks_path(@group), notice: "タスクが作成されました" }
+        format.json 
+      end
+    else
+      flash.now[:alert] = "タスクを入力してください。"
+      render :index
+    end
   end
 
   def edit
@@ -29,7 +27,10 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to group_tasks_path(@group), notice: "タスクが更新されました。"
+      respond_to do |format|
+        format.html { redirect_to group_tasks_path(@group), notice: "タスクが更新されました。" }
+        format.json 
+      end
     else
       flash.now[:alert] = "タスクを入力してください。"
       render :edit
@@ -70,7 +71,7 @@ class TasksController < ApplicationController
   end
 
   def get_tasks
-    @tasks = @group.tasks.includes(:user)
+    @tasks = @group.tasks.includes(:user).order("completed, target_dt")
     @tasks_completed = @tasks.search_completed
     @tasks_pending = @tasks.search_pending
     @tasks_warning = @tasks.search_warning

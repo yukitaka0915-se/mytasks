@@ -8,8 +8,16 @@ class Task < ApplicationRecord
   after_find :get_taskdata
 
   validates :title, presence: true
+  validates :priority_id, presence: true
 
   attr_accessor :status
+
+  enum priority_id: {
+    "---": 0,
+    小: 1,
+    中: 2,
+    大: 3,
+  } 
 
   # カレントユーザーとカレントタスクリストの総数を取得する。
   scope :search_all, -> (user_id, group_id){

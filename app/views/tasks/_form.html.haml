@@ -1,4 +1,4 @@
-= form_with(model: [group, task]) do |f| 
+= form_with(model: [group, task], local: true) do |f| 
   - colspanlength = "6"
   %table.field__table
     %tbody
@@ -29,7 +29,7 @@
         %td
           = f.check_box :completed, class: 'field__text--completed'
         %td
-          = f.select :priority_id, [["--", 0],["重要度1", 1],["重要度2", 2],["重要度3", 3]], {}, { id: "priority_id", class: 'field__combo--priority_id' } 
+          = f.select :priority_id, Task.priority_ids.keys, {selected: task.priority_id}, { id: "priority_id", class: 'field__combo--priority_id' } 
         %td
           = f.date_field :target_dt, class: 'field__text--target_dt'
         %td
