@@ -10,9 +10,8 @@ class GroupsController < ApplicationController
   end
 
   def create
-    # @group = Group.new(group_params)
-    binding.pry
-    if @group.create(group_params)
+    @group = Group.new(group_params)
+    if @group.save
       redirect_to root_path, notice: 'グループを作成しました'
     else
       render :new
@@ -42,7 +41,7 @@ class GroupsController < ApplicationController
   end
 
   def get_group
-    @group = Group.where("user_id = ?",params[:user_id]).order("id")
+    @group = Group.has_with_mytasklist(current_user.id).order("id")
   end
 
   def set_group

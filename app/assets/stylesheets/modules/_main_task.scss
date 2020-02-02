@@ -1,6 +1,7 @@
 .task-main{
   width: $main_width;
   float: left;
+
   .main-header{
     height: $header_height;
     padding: $padding_TB0_LR40px;
@@ -8,23 +9,48 @@
     @include justify-content(space-between);
     border-bottom: solid 1px #eeeeee;
     overflow: scroll;
+    
     &__left-box{
-      margin-top: 35px;
+      margin-top: 25px;
+      margin-bottom:10px;
+
       &__current-group{
         font-size: 20px;
         color: $main_color_blackInk;
-        margin-bottom:15px;
       }
+
       &__task-list{
         @include flexbox;
         font-size: 12px;
-        color: $main_color_lightgray;
-        &__task{
+        list-style: none;
+
+        &--total{
+          background-color: $light_green;
           margin-left: $marginleft_interval;
-          list-style: none;
+        }
+
+        &--complete{
+          background-color: $task_color_complete;
+          margin-left: $marginleft_interval;
+        }
+
+        &--pending{
+          background-color: $task_color_pending;
+          margin-left: $marginleft_interval;
+        }
+
+        &--warning{
+          background-color: $task_color_warning;
+          margin-left: $marginleft_interval;
+        }
+        
+        &--overdue{
+          background-color: $task_color_overdue;
+          margin-left: $marginleft_interval;
         }
       }
     }
+
     &__edit-btn{
       height: $editButton_hight;
       line-height: $editButton_hight;
@@ -33,135 +59,306 @@
       border: solid 2px $light_green;
       position: absolute;
       right: $editButton_maginRight;
+      cursor: pointer;
+      color: $light_green;
+
     }
+
     a{
       color: $light_green;
       &:active{
         color: $light_green;
       }
     }
-    
   }
+
+  .task_create{
+    height: $taks_create_height + 10px;
+    background-color: $main_back_color;
+
+    &__add-btn{
+      height: $editButton_hight;
+      width: $submitbtn_width;
+      background-color: $white;
+      line-height: $editButton_hight;
+      padding: $padding_TB0_LR20px;
+      border: solid 2px $light_green;
+      position: relative;
+      top: 10px;
+      left: $editButton_maginRight;
+      cursor: pointer;
+      color: $light_green;
+    }
+      
+  }
+
+
+
   .tasks{
     height: $mainTasks_hight;
     padding: 20px 40px;
-    background-color: #f0f0f0;
+    background-color: $main_back_color;
     overflow: scroll;
+
     .task{
       padding-bottom: 20px;
+
       &__upper-info{
         @include flexbox;
         margin-bottom: 10px;
+
         &__talker{
           color:$main_color_darkgray;
           font-size: 16px;
           font-weight: bold;
         }
+
         &__date{
           color:$main_color_darkgray;
           font-size: 12px;
           margin-left: 10px;
         }
+
       }
+
       &__lower-info{
         color: $main_color_darkgray;
+
+        &__priority{
+          font-size: 12px;
+        }
+
         &__target{
           font-size: 12px;
         }
+
         &__complete{
           font-size: 12px;
           margin-bottom: 10px;
         }
+
       }
+
       &--normal{
         background-color: $task_color_normal;
       }
+
       &--complete{
         background-color: $task_color_complete;
       }
+
       &--warning{
         background-color: $task_color_warning;
       }
+
       &--overdue{
         background-color: $task_color_overdue;
       }
     } 
   }
-  
+  .taskcolor_normal{
+    background-color: $task_color_normal;
+  }
+  .taskcolor_complete{
+    background-color: $task_color_complete;
+  }
+  .taskcolor_warning{
+    background-color: $task_color_warning;
+  }
+  .taskcolor_overdue{
+    background-color: $task_color_overdue;
+  }
+
   .form{
     height: $form_height;
     padding: 20px 40px;
     background-color:#ddd;
+
     &__task-name{
       font-size: 16px;
       font-weight: bold;
       margin-bottom: 20px;
     }
+
     form{
       @include flexbox;
+      tr{
+        height: 40px;
+      }
       .field{
         position: relative;
         width: $WidthMax;
         font-size: 14px;
+
+        $fld_height: 30px;
+
+        $th_width_title: 110px;
+        $fld_width_title: 100%;
+        
+        $th_width_description: $th_width_title;
+        $fld_width_description: $fld_width_title;
+        
+        $th_width_place: $th_width_title;
+        $fld_width_place: $fld_width_title;
+        
+        $th_width_completed: 40px;
+        $fld_width_completed: 20px;
+        
+        $th_width_priority_id: 100px;
+        $fld_width_priority_id: 90px;
+
+        $th_width_target_dt: 160px;
+        $fld_width_target_dt: $th_width_target_dt - 10px;
+        
+        $th_width_target_tm: 100px;
+        $fld_width_target_tm: 80px;
+
+        $th_width_warning_st_days: 120px;
+        $fld_width_warning_st_days: 50px;
+
+        $th_width_tasklist: 180px;
+        $fld_width_tasklist: $th_width_tasklist;
+
+        &__table{
+          width: calc( #{$WidthMax} - #{$submitbtn_width * 2} );
+        }
+
+        &__label{
+          height: 20px;
+          width: $th_width_title;
+          text-align: right;
+        }
+
         &__title{
-          height: 10px;
-          width: 140px;
-          // padding: 0 40px 0 10px;
+          height: 20px;
+          width: $th_width_title;
           color: $main_color_darkgray;
-          border-style: none;
+          text-align: center;
 
           &--completed{
-            width: 40px;
+            width: $th_width_completed;
+            text-align: center;
           }
 
           &--priority_id{
-            width: 90px;
+            width: $th_width_priority_id;
+            text-align: center;
           }
 
-          &--description{
-            width: 200px;
+          &--target_dt{
+            width: $th_width_target_dt;
+            text-align: center;
+          }
+
+          &--target_tm{
+            width: $th_width_target_tm;
+            text-align: center;
           }
 
           &--warning_st_days{
-            width: 100px;
+            width: $th_width_warning_st_days;
+            text-align: center;
           }
-          
+
+          &--tasklist{
+            width: $th_width_tasklist;
+            text-align: center;
+          }
+
+          &--completed_at{
+            width: $th_width_tasklist;
+            text-align: center;
+          }
         }
         
         &__text{
-          height: 20px;
-          width: 120px;
-          // padding: 0 40px 0 10px;
+          height: 40px;
           color: $main_color_darkgray;
           border-style: none;
 
-          &--completed{
-            width: 20px;
-          }
-
-          &--priority_id{
-            width: 80px;
+          &--title{
+            height: $fld_height;
+            width: $fld_width_title;
           }
 
           &--description{
-            height: 40px;
-            width: 180px;
+            height: $fld_height;
+            width: $fld_width_description;
+          }
+
+          &--place{
+            height: $fld_height;
+            width: $fld_width_place;
+          }
+
+          &--completed{
+            width: $fld_width_completed;
+            display: block;
+            position: relative;
+            margin: auto;
+            
+          }
+
+          &--target_dt{
+            height: $fld_height;
+            width: $fld_width_target_dt;
+            position: relative;
+            margin: auto;
+          }
+
+          &--target_tm{
+            height: $fld_height;
+            width: $fld_width_target_tm;
+            margin:auto;
+            position: relative;
+            text-align: center;            
           }
 
           &--warning_st_days{
-            width: 30px;
+            height: $fld_height;
+            width: $fld_width_warning_st_days;
+          }
+        }
+
+        &__combo{
+          color: $main_color_darkgray;
+
+          &--priority_id{
+            height: $fld_height;
+            width: $fld_width_priority_id;
           }
 
+          &--tasklist{
+            height: $fld_height;
+            width: $th_width_tasklist;
+          }
         }
       }
-      .submit-btn{
-        width: 100px;
-        height: 50px;
+
+      @mixin submitbtn {
+        width: $submitbtn_width;
+        line-height: 50px;
         padding: 0 30px;
-        margin-left: 15px;
-        background-color: $light_green;
+        margin: auto 5px;
         color:$FontCcolor_default;
         cursor: pointer;
+        display: inline-block;
+      }      
+
+      #submit-btn{
+
+        &__save{
+          @include submitbtn;
+          background-color: $light_green;
+        }
+
+        &__delete{
+          @include submitbtn;
+          position: relative;
+          margin: 75px 5px;
+          background-color: $task_color_overdue;
+        }
+
       }
     }
   }

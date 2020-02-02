@@ -10,15 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_15_044911) do
+ActiveRecord::Schema.define(version: 2020_01_17_112059) do
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_groups_on_name"
+    t.boolean "authority", default: false
+    t.index ["name"], name: "index_groups_on_name", unique: true
     t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "priority_id"
+    t.string "description"
+    t.string "place"
+    t.date "target_dt"
+    t.time "target_tm"
+    t.integer "warning_st_days"
+    t.date "warning_dt"
+    t.boolean "completed", default: false, null: false
+    t.datetime "completed_at"
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_tasks_on_group_id"
+    t.index ["target_dt"], name: "index_tasks_on_target_dt"
+    t.index ["target_tm"], name: "index_tasks_on_target_tm"
+    t.index ["title"], name: "index_tasks_on_title", unique: true
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+    t.index ["warning_dt"], name: "index_tasks_on_warning_dt"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -37,4 +61,6 @@ ActiveRecord::Schema.define(version: 2020_01_15_044911) do
   end
 
   add_foreign_key "groups", "users"
+  add_foreign_key "tasks", "groups"
+  add_foreign_key "tasks", "users"
 end

@@ -1,0 +1,50 @@
+= form_with(model: [group, task], local: true) do |f| 
+  - colspanlength = "6"
+  %table.field__table
+    %tbody
+      %tr
+        %td.field__label
+          %label タイトル：
+        %td{colspan: colspanlength}
+          = f.text_field :title, class: 'field__text--title', placeholder: "type a title"
+      %tr
+        %td.field__label
+          %label 内容：
+        %td{colspan: colspanlength}
+          = f.text_field :description, class: 'field__text--description', placeholder: "type a description" 
+      %tr
+        %td.field__label
+          %label 場所：
+        %td{colspan: colspanlength}
+          = f.text_field :place, class: 'field__text--place', placeholder: "type a place" 
+      %tr
+        %th.field__title--completed 完了
+        %th.field__title--priority_id 重要度
+        %th.field__title--target_dt 期限日
+        %th.field__title--target_tm 期限時刻
+        %th.field__title--warning_st_days 警告
+        %th.field__title--tasklist タスクリスト
+        %th.field__title--completed_at 完了日
+      %tr
+        %td
+          = f.check_box :completed, class: 'field__text--completed'
+        %td
+          = f.select :priority_id, Task.priority_ids.keys, {selected: task.priority_id}, { id: "priority_id", class: 'field__combo--priority_id' } 
+        %td
+          = f.date_field :target_dt, class: 'field__text--target_dt'
+        %td
+          = f.time_field :target_tm, class: 'field__text--target_tm' 
+        %td
+          = f.number_field :warning_st_days, min: 1, max: 31, class: 'field__text--warning_st_days'
+          日前 
+        %td
+          = f.select :group_id, groups.map { |grp| [grp.name, grp.id] }, {selected: group.id}, { id: "group_id", class: 'field__combo--tasklist' } 
+        %td.field__text--completed_at
+          = task.completed_at.to_s(:datetime) unless task.completed_at.nil?
+  - unless local_assigns[:edit_flag].present?
+    = f.submit 'Save', id: 'submit-btn__save'
+  - else 
+    = f.submit 'Update', id: 'submit-btn__save'
+    = link_to group_task_path(group.id, task.id), method: :delete do
+      #submit-btn__delete Delete
+

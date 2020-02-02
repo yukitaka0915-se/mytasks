@@ -89,7 +89,7 @@ li {
   }
 }
 
-.mytask-group-user {
+.mytask-group-list {
   padding: 0 15px;
   line-height: 50px;
   font-size: 14px;
@@ -103,7 +103,6 @@ li {
     float: left;
   }
   &__btn {
-    float: right;
     display: inline-block;
     cursor: pointer;
     &--add {
