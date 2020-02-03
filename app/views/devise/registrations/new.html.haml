@@ -10,6 +10,10 @@
     %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
   .field
+    = f.label :slack_webhook_url
+    %br/
+    = f.text_field :slack_webhook_url, autofocus: true
+  .field
     = f.label :password
     - if @minimum_password_length
       %em

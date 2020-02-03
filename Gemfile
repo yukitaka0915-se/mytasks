@@ -84,3 +84,5 @@ gem 'devise'
 gem 'fog-aws'
 
 gem "rails-i18n"
+
+gem "slack-notifier"

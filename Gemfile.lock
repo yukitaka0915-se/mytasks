@@ -251,6 +251,7 @@ GEM
     sassc (2.2.1)
       ffi (~> 1.9)
     sexp_processor (4.13.0)
+    slack-notifier (2.3.2)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -316,6 +317,7 @@ DEPENDENCIES
   rails-i18n
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
+  slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
