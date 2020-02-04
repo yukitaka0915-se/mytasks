@@ -2,7 +2,7 @@
   .main-header
     .main-header__left-box
       %h2.main-header__left-box__current-group
-        = @group.name == nil? ? "名前なし" : @group.name
+        = @group.name.nil? ? "名前なし" : @group.name
       %ul.main-header__left-box__task-list
         %li.main-header__left-box__task-list--total
           タスク数：
@@ -24,6 +24,8 @@
           期限切れ：
           = @tasks_overdue.count
           件
+    = link_to group_reminders_path(@group) do
+      .main-header__reminder-btn reminder
     - if @group.authority == false
       = link_to edit_group_path(@group.id) do
         .main-header__edit-btn Edit

@@ -86,3 +86,5 @@ gem 'fog-aws'
 gem "rails-i18n"
 
 gem "slack-notifier"
+
+gem 'whenever', require: false

@@ -51,17 +51,27 @@
       }
     }
 
-    &__edit-btn{
+    @mixin editbtn {
       height: $editButton_hight;
       line-height: $editButton_hight;
       padding: $padding_TB0_LR20px;
       margin-top: 30px;
-      border: solid 2px $light_green;
       position: absolute;
-      right: $editButton_maginRight;
       cursor: pointer;
-      color: $light_green;
+    }      
 
+    &__reminder-btn{
+      @include editbtn;
+      color: $light_blue;
+      border: solid 2px $light_blue;
+      right: $reminderButton_maginRight;
+    }
+
+    &__edit-btn{
+      @include editbtn;
+      color: $light_green;
+      border: solid 2px $light_green;
+      right: $editButton_maginRight;
     }
 
     a{

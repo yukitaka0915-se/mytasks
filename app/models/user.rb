@@ -13,7 +13,9 @@ class User < ApplicationRecord
   after_create :create_initial_group
 
 
+  # scopes
 
+  
   private
 
   # User作成直後に、タスクリスト「リマインダー」を作成する
