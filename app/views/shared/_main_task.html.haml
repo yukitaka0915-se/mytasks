@@ -24,8 +24,6 @@
           期限切れ：
           = @tasks_overdue.count
           件
-    = link_to group_reminders_path(@group) do
-      .main-header__reminder-btn reminder
     - if @group.authority == false
       = link_to edit_group_path(@group.id) do
         .main-header__edit-btn Edit
