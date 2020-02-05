@@ -1,4 +1,4 @@
-namespace :task_reminder do
+namespace :send_reminder do
   desc "reminderタスクのサンプル"
   task :sample do
     puts "Hello World"

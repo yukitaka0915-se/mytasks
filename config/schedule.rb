@@ -19,8 +19,15 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minutes do # 1.minute 1.day 1.week 1.month 1.year is also supported
-  # runner "MyModel.some_process"
-  rake "task_reminder:send_messages"
-  # command "/usr/bin/my_great_command"
+# 実行環境の指定
+set :environment, :development
+# 出力先logの指定
+set :output, "log/crontab.log"
+
+set      :job_template, "source $HOME/.zshrc; $(which zsh) -l -c ':job'"
+job_type :runner,       "cd :path && bundle exec rails runner -e :environment ':task' :output"
+
+# every 1.day, at: '6:30 am' do
+every 1.minute  do
+    rake "send_reminder:send_messages"
 end
