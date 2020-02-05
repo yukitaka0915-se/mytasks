@@ -1,17 +1,21 @@
 class Task < ApplicationRecord
+  # association
   belongs_to :user
   belongs_to :group
 
+  # callback
   before_create :set_taskdata
   before_update :set_taskdata
-
   after_find :get_taskdata
 
+  # validation
   validates :title, presence: true
   validates :priority_id, presence: true
 
+  # インスタンス変数のgetter, setter定義
   attr_accessor :status
 
+  # enum定義
   enum priority_id: {
     "---": 0,
     小: 1,
@@ -28,6 +32,10 @@ class Task < ApplicationRecord
     has_completed(true)
   }
 
+  scope :search_uncompleted, -> {
+    has_completed(false)
+  }
+
   scope :search_pending, -> {
     has_completed(false)
   }
@@ -39,6 +47,22 @@ class Task < ApplicationRecord
   scope :search_overdue, -> {
     has_completed(false).where('target_dt > ?', "current_date()")
   }
+
+  scope :search_reminder, -> {
+    joins(
+      "INNER JOIN groups ON groups.id = tasks.group_id
+       INNER JOIN users  ON users.id = tasks.user_id  "
+    ).where(
+      tasks: { completed: false }
+    ).select(
+      " users.name as user_name
+       ,users.slack_webhook_url
+       ,groups.name as group_name
+       ,tasks.*
+      "
+    )
+  }
+
 
   private
 

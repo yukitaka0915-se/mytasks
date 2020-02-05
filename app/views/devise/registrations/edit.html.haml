@@ -9,6 +9,10 @@
     = f.label :email
     %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
+  .field
+    = f.label :slack_webhook_url
+    %br/
+    = f.text_area :slack_webhook_url, autofocus: true, placeholder: "type a slack webhook url"
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
@@ -33,9 +37,11 @@
     = f.password_field :current_password, autocomplete: "current-password"
   .actions
     = f.submit "Update"
+%br/
+%br/
 %h3 Cancel my account
--# %p
--#   Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+%p
+  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
 %br/
 = link_to "Back", :back
 %br/

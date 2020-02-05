@@ -1,8 +1,10 @@
 class Group < ApplicationRecord
+  # association
   belongs_to :user
   has_many :tasks, dependent: :destroy
   # has_many :tasks, dependent: :restrict_with_error
 
+  # validation
   validates :name, presence: true, uniqueness: true
 
   # カレントユーザーのタスクリストを検索する。

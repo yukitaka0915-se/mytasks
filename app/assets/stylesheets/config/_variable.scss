@@ -48,10 +48,12 @@ $editButton_hight: 40px;                   // 送信ボタンの高さ
 $editButton_maginRight: 40px;              // 送信ボタンの右余白
 
 // form
-$form_height: 220px;                        // formの高さ
+$form_height: 240px;                        // formの高さ
 $submitbtn_width: 100px;                    // submitボタンの幅
 
 // tasks
 $taks_create_height: $editButton_hight;    // 作成ボタンの高さ
 $editButton_maginRight: 40px;              // 背景色
+$reminderButton_maginRight: calc(#{$editButton_maginRight} * 3);  
+
 $mainTasks_hight: calc( #{$calc_vh_max} - #{$header_height + $taks_create_height + $form_height} );     // ヘッダーとフォームの高さを引いた残り

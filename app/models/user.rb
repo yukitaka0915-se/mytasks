@@ -4,14 +4,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
  
+  # association
   has_many :groups, dependent: :destroy
   # has_many :groups, dependent: :restrict_with_error
   has_many :tasks, dependent: :destroy
 
+  # callback
   after_create :create_initial_group
 
 
+  # scopes
 
+  
   private
 
   # User作成直後に、タスクリスト「リマインダー」を作成する
