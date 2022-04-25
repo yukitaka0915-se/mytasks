@@ -20,14 +20,22 @@
 # Learn more: http://github.com/javan/whenever
 
 # 実行環境の指定
-set :environment, :development
+# set :environment, :development
 # 出力先logの指定
-set :output, "log/crontab.log"
+# set :output, "log/crontab.log"
 
-set      :job_template, "source $HOME/.zshrc; $(which zsh) -l -c ':job'"
-job_type :runner,       "cd :path && bundle exec rails runner -e :environment ':task' :output"
+# set      :job_template, "source $HOME/.zshrc; $(which zsh) -l -c ':job'"
+# job_type :runner,       "cd :path && bundle exec rails runner -e :environment ':task' :output"
 
-# every 1.day, at: '6:30 am' do
-every 1.minute  do
-    rake "send_reminder:send_messages"
-end
+# # every 1.day, at: '6:30 am' do
+# every 1.minute  do
+#   rake "send_reminder:send_messages"
+# end
+
+# ENV.each { |k, v| env(k, v) } # 環境変数を全部設定する。※もっと丁寧にやったほうがいいかも。。
+# set :output, "log/crontab.log"
+
+# # every 6 second do(every 1.day, at: '6:30 am' do on product)
+# every '*/10 * * * *' do
+#   rake "send_reminder:send_messages"
+# end
